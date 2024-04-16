@@ -16,24 +16,8 @@ function getParametersForUnsplash({width, height, quality, format}) {
  * 파라미터로 넘어온 문자열에서 일부 특수문자를 제거하는 함수
  * (Markdown으로 된 문자열의 특수문자를 제거하기 위함)
  * */
-function removeSpecialCharacter(str) {
-  const removeCharacters = ['#', '_', '*', '~', '&', ';', '!', '[', ']', '`', '>', '\n', '=', '-']
-  let _str = str
-  let i = 0,
-    j = 0
-
-  for (i = 0; i < removeCharacters.length; i++) {
-    j = 0
-    while (j < _str.length) {
-      if (_str[j] === removeCharacters[i]) {
-        _str = _str.substring(0, j).concat(_str.substring(j + 1))
-        continue
-      }
-      j++
-    }
-  }
-
-  return _str
+function removeSpecialCharacter(str, maxLen = 300) {
+    return str.substring(0, maxLen).replace(/[#_*~&;!\[\]`>\\n=-]/g, '');
 }
 
 function Article(props) {
